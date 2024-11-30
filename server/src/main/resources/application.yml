@@ -1,0 +1,39 @@
+server:
+  port: 8088
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  tracing:
+    sampling:
+      probability: 1.0
+
+spring:
+  application:
+    name: server
+  mail:
+    host: smtp.qq.com
+    username: 2917755602@qq.com
+    password: xljysarroigsdfid
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+  boot:
+    admin:
+      notify:
+        mail:
+          enabled: true
+          from: 2917755602@qq.com
+          to: 2917755602@qq.com # ???,??
+          cc: 2917755602@qq.com # ???,??
+        dingtalk:
+          enabled: true
+          webhook-url: https://oapi.dingtalk.com/robot/send?access_token=8372f86a869bf3f488e869b48520f32731baea80d1b86defb17e10750a3bcf1c
+          secret: 8372f86a869bf3f488e869b48520f32731baea80d1b86defb17e10750a3bcf1c
+          message: "warning??? #{instance.registration.name} - #{instance.id} ?????"
+
+logging:
+  pattern:
+    level: ${spring.application.name:},%X{traceId:-},%X{spanId:-}
