@@ -1,0 +1,17 @@
+server:
+  port: ${user-service.port}
+#jwt:
+#  secret-key: 2ad5af5f-85cd-4423-b443-7a4ec30072f7
+spring:
+  application:
+    name: user-service
+#  cloud:
+#    sentinel:
+#      transport:
+#        port: ${sentinel.transport.port.user-service}
+#        dashboard: ${sentinel.transport.dashboard}
+#    nacos:
+#      discovery:
+#        server-addr: localhost:8848
+#        username: nacos
+#        password: nacos

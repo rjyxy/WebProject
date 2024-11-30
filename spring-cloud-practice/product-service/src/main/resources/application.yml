@@ -1,0 +1,9 @@
+server:
+  port: ${product-service.port}
+
+spring:
+  cloud:
+    sentinel:
+      transport:
+        port: ${sentinel.transport.port.product-service}
+        dashboard: ${sentinel.transport.dashboard}

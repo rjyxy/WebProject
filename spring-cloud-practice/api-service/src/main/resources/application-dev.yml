@@ -1,0 +1,66 @@
+spring:
+  #  数据源配置可以移至 Nacos 配置中心：common-service-dev.yml
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/micro_service?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=true
+#    username: root
+#    password: 123456
+#  jackson:
+#    default-property-inclusion: non_null
+  cloud:
+    openfeign:
+      client:
+        defaultConfig: fast
+        config:
+          default:
+            connectTimeout: ${spring.cloud.openfeign.client.config.default.connectTimeout}
+            readTimeout: ${spring.cloud.openfeign.client.config.default.readTimeout}
+          fast:
+            connectTimeout: ${spring.cloud.openfeign.client.config.fast.connectTimeout}
+            readTimeout: ${spring.cloud.openfeign.client.config.fast.readTimeout}
+      httpclient:
+        hc5.enabled: true
+        max-connections: ${spring.cloud.openfeign.httpclient.max-connections}
+        max-connections-per-route: ${spring.cloud.openfeign.httpclient.max-connections-per-route}
+    nacos:
+      discovery:
+        server-addr: ${nacos.server-address}
+        username: ${nacos.username}
+        password: ${nacos.password}
+        metadata:
+          preserved:
+            heart:
+              beat:
+                interval: ${preserved.heart.beat.interval}
+                timeout: ${preserved.heart.beat.timeout}
+            ip:
+              delete:
+                timeout: ${preserved.ip.delete.timeout}
+    sentinel:
+      datasource:
+        flow:
+          nacos:
+            server-addr: ${nacos.server-address}
+            username: ${nacos.username}
+            password: ${nacos.password}
+            group-id: ${sentinel.nacos.group-id}
+            rule-type: flow
+            data-id: ${spring.application.name}-flow-rules
+            data-type: json
+        degrade:
+          nacos:
+            server-addr: ${nacos.server-address}
+            username: ${nacos.username}
+            password: ${nacos.password}
+            group-id: ${sentinel.nacos.group-id}
+            rule-type: degrade
+            data-id: ${spring.application.name}-degrade-rules
+            data-type: json
+
+
+mybatis-plus:
+  type-aliases-package: top.yxy.cloud.order.entity,top.yxy.cloud.product.entity,top.yxy.cloud.user.entity
+
+feign:
+  sentinel:
+    enabled: true

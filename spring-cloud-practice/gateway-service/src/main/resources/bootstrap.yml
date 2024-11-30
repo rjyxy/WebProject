@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: gateway-service
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${nacos.server-address}
+        username: ${nacos.username}
+        password: ${nacos.password}
